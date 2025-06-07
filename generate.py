@@ -31,17 +31,27 @@ if __name__ == "__main__":
             image = Image.open(SKILL_CARD_IMAGE_PATH)
 
         title_font = ImageFont.truetype('Songti.ttc', 100)
+        type_font = ImageFont.truetype('Songti.ttc', 50)
+        cost_font = ImageFont.truetype('Songti.ttc', 100)
         desc_font = ImageFont.truetype('Songti.ttc', 50)
 
         title_x, title_y = 50, 60
         desc_x, desc_y = 50, 250
+        cost_x, cost_y = 530, 10
+        type_x, type_y = 500, 1000
 
         draw = ImageDraw.Draw(image)
 
         # draw title
         draw.text((title_x, title_y), entity[0], font=title_font, fill='white')
 
+        # draw type
+        draw.text((type_x, type_y), entity[1], font=type_font, fill='white')
+
+        # draw cost
+        draw.text((cost_x, cost_y), f"{entity[2]}费", font=cost_font, fill='white')
+
         # draw desc
-        draw_text_multiline(draw, (desc_x, desc_y), entity[1], desc_font, 12, 65)
+        draw_text_multiline(draw, (desc_x, desc_y), entity[4], desc_font, 12, 65)
 
         image.save(f'exports/{entity[0]}.png')
