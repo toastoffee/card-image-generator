@@ -9,18 +9,26 @@ def draw_text_multiline(draw, xy, text, font, line_len, line_height):
         i += line_len
         xy = (xy[0], xy[1] + line_height)
 
-CARD_IMAGE_PATH = "card.png"
+
+ATTACK_CARD_IMAGE_PATH = "card-attack.png"
+SKILL_CARD_IMAGE_PATH = "card-skill.png"
 
 if __name__ == "__main__":
 
-    card_data = pd.read_excel('card_data.xlsx', sheet_name='Sheet1')
+    card_data = pd.read_excel('card_data.xlsx', sheet_name='单卡')
     print(card_data.values)
 
     for entity in card_data.values:
 
         width, height = 700, 1200
         # image = Image.new('RGB', (width, height), color='white')
-        image = Image.open(CARD_IMAGE_PATH)
+
+        type_name = entity[1]
+        image = None
+        if type_name == "攻击":
+            image = Image.open(ATTACK_CARD_IMAGE_PATH)
+        elif type_name == "技能":
+            image = Image.open(SKILL_CARD_IMAGE_PATH)
 
         title_font = ImageFont.truetype('Songti.ttc', 100)
         desc_font = ImageFont.truetype('Songti.ttc', 50)
